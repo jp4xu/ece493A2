@@ -46,6 +46,7 @@ class rlalgorithm:
             expected_value = value_max * ((1 - self.epsilon) / max_count + self.epsilon / k) * max_count + (np.sum(state_action) - value_max * max_count) * (self.epsilon / k)
 
             target = r + self.gamma * expected_value 
+        else:
             target = r 
 
         self.q_table.loc[s, a] += self.lr * (target - current)
