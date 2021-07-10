@@ -4,7 +4,7 @@ from random import randint
 
 
 class rlalgorithm:
-    def __init__(self, actions, learning_rate = 0.01, reward_decay = 0.9, e_greedy = 0.1, init_val = 0, name = None):
+    def __init__(self, actions, learning_rate = 0.1, reward_decay = 0.9, e_greedy = 0.1, init_val = 0, name = None):
         self.initial_vals = init_val
         self.epsilon = e_greedy
         self.gamma = reward_decay

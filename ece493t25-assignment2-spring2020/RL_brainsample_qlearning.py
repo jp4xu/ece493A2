@@ -5,7 +5,7 @@ from random import randint
 
 
 class rlalgorithm:
-    def __init__(self, actions, learning_rate = 0.01, reward_decay = 0.8, e_greedy = 0.1, init_val = 0, name = None):
+    def __init__(self, actions, learning_rate = 0.1, reward_decay = 0.9, e_greedy = 0.1, init_val = 0, name = None):
         self.initial_vals = init_val
         self.epsilon = e_greedy
         self.gamma = reward_decay
@@ -40,24 +40,24 @@ class rlalgorithm:
 
 
     def learn(self, s, a, r, s_):
-        # self.check_state_exists(s)
         self.check_state_exists(s_)
         self.total_r += r
+
         exp_r = self.Q[s][a]
         a_ = self.choose_action(str(s_))
+
         if s_ != 'terminal':
             max_a_ = self.find_max_action(s_)
             q_target = r + self.gamma * self.Q[s_][max_a_]
             self.end_episode()
-            
         else:
             q_target = r  # next state is terminal
         self.Q[s][a] += self.alpha * (q_target - exp_r)  # update
-        
         return s_, a_
 
 
     def end_episode(self):
+        # Metadata tracking for end of episode
         self.episodes += 1
         if self.total_r > self.max_r:
             self.max_r = self.total_r
